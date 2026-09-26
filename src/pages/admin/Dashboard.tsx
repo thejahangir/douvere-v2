@@ -56,7 +56,7 @@ export const Dashboard: React.FC = () => {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <KpiCard
           title="Total Revenue"
-          value={`$${analytics.totalRevenue.toLocaleString()}`}
+          value={`₹${analytics.totalRevenue.toLocaleString('en-IN')}`}
           growth={analytics.revenueGrowth}
           icon={<TrendingUp size={20} className="text-purple-400" />}
           color="bg-purple-500/20"
@@ -95,10 +95,10 @@ export const Dashboard: React.FC = () => {
                   <div
                     className="w-full bg-gradient-to-t from-purple-600 to-pink-500 rounded-t-lg transition-all duration-500 hover:from-purple-500 hover:to-pink-400 cursor-pointer"
                     style={{ height: `${(point.revenue / maxRevenue) * 130}px` }}
-                    title={`$${point.revenue.toLocaleString()}`}
+                    title={`₹${point.revenue.toLocaleString('en-IN')}`}
                   />
                   <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur text-white text-[10px] font-bold px-2 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                    ${point.revenue.toLocaleString()}
+                    ₹{point.revenue.toLocaleString('en-IN')}
                   </div>
                 </div>
                 <span className="text-[10px] text-white/30 font-medium">{point.month}</span>
@@ -151,7 +151,7 @@ export const Dashboard: React.FC = () => {
                   <p className="text-xs font-semibold text-white/80 truncate">{p.name}</p>
                   <p className="text-[10px] text-white/30">{p.sales} units</p>
                 </div>
-                <span className="text-xs font-bold text-green-400">${p.revenue.toLocaleString()}</span>
+                <span className="text-xs font-bold text-green-400">₹{p.revenue.toLocaleString('en-IN')}</span>
               </div>
             ))}
           </div>
@@ -178,7 +178,7 @@ export const Dashboard: React.FC = () => {
                   <tr key={order.id} className="border-b border-white/3 hover:bg-white/3 transition-colors">
                     <td className="py-3 pr-4 font-mono text-white/50">{order.id}</td>
                     <td className="py-3 pr-4 text-white/80 font-medium">{order.customerName}</td>
-                    <td className="py-3 pr-4 text-white font-bold">${order.total.toFixed(2)}</td>
+                    <td className="py-3 pr-4 text-white font-bold">₹{order.total.toLocaleString('en-IN')}</td>
                     <td className="py-3">
                       <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold capitalize ${STATUS_COLORS[order.status]}`}>
                         {order.status}

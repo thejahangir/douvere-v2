@@ -22,22 +22,11 @@ const ProductSkeleton = () => (
 );
 
 export const Shop = () => {
-  const { addToCart, discounts, adminProducts } = useStore();
+  const { discounts, adminProducts } = useStore();
   const allProducts = [...products, ...adminProducts];
   const [activeCategory, setActiveCategory] = useState('All');
   const [sortBy, setSortBy] = useState('featured');
   const [isLoading, setIsLoading] = useState(true);
-  const [addedItems, setAddedItems] = useState<Record<string, boolean>>({});
-
-  const handleAddToCart = (e: React.MouseEvent, product: any) => {
-    e.preventDefault();
-    addToCart(product);
-    
-    setAddedItems(prev => ({ ...prev, [product.id]: true }));
-    setTimeout(() => {
-      setAddedItems(prev => ({ ...prev, [product.id]: false }));
-    }, 2000);
-  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -154,40 +143,9 @@ export const Shop = () => {
                     )}
                   </div>
                   <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
-                    <motion.button 
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={(e) => handleAddToCart(e, product)}
-                      className={`w-full font-bold py-3.5 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center space-x-2 ${
-                        addedItems[product.id]
-                          ? 'bg-brand-pink text-white'
-                          : 'bg-white/90 backdrop-blur-xl text-brand-purple hover:bg-gradient-to-r hover:from-brand-pink hover:to-brand-purple hover:text-white'
-                      }`}
-                    >
-                      <AnimatePresence mode="wait">
-                        {addedItems[product.id] ? (
-                          <motion.div
-                            key="added"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            className="flex items-center space-x-2"
-                          >
-                            <Check size={18} />
-                            <span>Added</span>
-                          </motion.div>
-                        ) : (
-                          <motion.span
-                            key="add"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                          >
-                            {(() => { const disc = discounts[product.id] ?? product.discount; const price = disc ? (product.price * (1 - disc/100)).toFixed(0) : product.price; return `Quick Add - ₹${Number(price).toLocaleString('en-IN')}`; })()}
-                          </motion.span>
-                        )}
-                      </AnimatePresence>
-                    </motion.button>
+                    <div className="w-full bg-white/95 backdrop-blur-xl text-stone-900 font-bold py-3.5 rounded-full shadow-lg text-center text-xs uppercase tracking-wider group-hover:bg-gradient-to-r group-hover:from-brand-pink group-hover:to-brand-purple group-hover:text-white transition-all duration-300">
+                      View Details
+                    </div>
                   </div>
                 </Link>
                 <div className="flex flex-col flex-1 px-2">

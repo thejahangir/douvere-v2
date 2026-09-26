@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../../context/StoreContext';
 import { Lock, Eye, EyeOff, ShieldCheck, Mail } from 'lucide-react';
+import logoImg from '../../assets/img/logo-douvere.png';
 
 export const AdminLogin: React.FC = () => {
   const { adminLogin } = useStore();
@@ -41,11 +42,11 @@ export const AdminLogin: React.FC = () => {
         <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
           {/* Logo / Icon */}
           <div className="flex flex-col items-center mb-8">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4 shadow-lg shadow-purple-500/30">
-              <ShieldCheck size={32} className="text-white" />
+            <div className="mb-4">
+              <img src={logoImg} alt="Douvere" className="h-9 w-auto object-contain brightness-0 invert" />
             </div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">Admin Access</h1>
-            <p className="text-white/40 text-sm mt-1">PRABHA<span className="text-yellow-400">.</span> Admin Panel</p>
+            <h1 className="text-xl font-bold text-white tracking-tight">Admin Access</h1>
+            <p className="text-white/40 text-xs mt-1">Management Portal</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">

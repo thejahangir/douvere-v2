@@ -206,7 +206,7 @@ export const Checkout = () => {
                 {isSubmitting ? (
                   <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                 ) : (
-                  `Pay $${total.toFixed(2)}`
+                  `Pay ₹${total.toLocaleString('en-IN')}`
                 )}
               </button>
             </form>
@@ -231,7 +231,7 @@ export const Checkout = () => {
                       <p className="text-xs text-stone-500">{item.category}</p>
                     </div>
                     <div className="flex items-center justify-end">
-                      <p className="text-sm font-medium text-stone-900">${(item.price * item.quantity).toFixed(2)}</p>
+                      <p className="text-sm font-medium text-stone-900">₹{(item.price * item.quantity).toLocaleString('en-IN')}</p>
                     </div>
                   </div>
                 ))}
@@ -240,23 +240,23 @@ export const Checkout = () => {
               <div className="border-t border-stone-200 pt-4 space-y-3">
                 <div className="flex justify-between text-sm text-stone-600">
                   <p>Subtotal</p>
-                  <p className="font-medium text-stone-900">${cartTotal.toFixed(2)}</p>
+                  <p className="font-medium text-stone-900">₹{cartTotal.toLocaleString('en-IN')}</p>
                 </div>
                 <div className="flex justify-between text-sm text-stone-600">
                   <p>Shipping</p>
-                  <p className="font-medium text-stone-900">{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</p>
+                  <p className="font-medium text-stone-900">{shipping === 0 ? 'Free' : `₹${shipping.toLocaleString('en-IN')}`}</p>
                 </div>
                 <div className="flex justify-between text-sm text-stone-600">
                   <p>Estimated taxes</p>
-                  <p className="font-medium text-stone-900">${tax.toFixed(2)}</p>
+                  <p className="font-medium text-stone-900">₹{tax.toLocaleString('en-IN')}</p>
                 </div>
               </div>
 
               <div className="border-t border-stone-200 mt-4 pt-4 flex justify-between items-center">
                 <p className="text-lg font-medium text-stone-900">Total</p>
                 <div className="flex items-end space-x-2">
-                  <span className="text-xs text-stone-500 mb-1">USD</span>
-                  <p className="text-2xl font-bold text-stone-900">${total.toFixed(2)}</p>
+                  <span className="text-xs text-stone-500 mb-1">INR</span>
+                  <p className="text-2xl font-bold text-stone-900">₹{total.toLocaleString('en-IN')}</p>
                 </div>
               </div>
             </div>

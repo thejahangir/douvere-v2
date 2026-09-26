@@ -60,15 +60,15 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   // Admin states
   const [isAdmin, setIsAdmin] = useState<boolean>(() => {
-    return localStorage.getItem('prabha_admin') === 'true';
+    return (localStorage.getItem('douvere_admin') || localStorage.getItem('prabha_admin')) === 'true';
   });
   const [orders, setOrders] = useState<Order[]>(() => {
-    const saved = localStorage.getItem('prabha_orders');
+    const saved = localStorage.getItem('douvere_orders') || localStorage.getItem('prabha_orders');
     return saved ? JSON.parse(saved) : mockOrders;
   });
   const [payments] = useState<Payment[]>(mockPayments);
   const [discounts, setDiscounts] = useState<Record<string, number>>(() => {
-    const saved = localStorage.getItem('prabha_discounts');
+    const saved = localStorage.getItem('douvere_discounts') || localStorage.getItem('prabha_discounts');
     return saved ? JSON.parse(saved) : {
       '1': 20,
       '3': 15,
@@ -77,37 +77,37 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     };
   });
   const [adminProducts, setAdminProducts] = useState<Product[]>(() => {
-    const saved = localStorage.getItem('prabha_admin_products');
+    const saved = localStorage.getItem('douvere_admin_products') || localStorage.getItem('prabha_admin_products');
     return saved ? JSON.parse(saved) : [];
   });
 
   // Load from local storage on mount
   useEffect(() => {
-    const savedCart = localStorage.getItem('prabha_cart');
-    const savedWishlist = localStorage.getItem('prabha_wishlist');
+    const savedCart = localStorage.getItem('douvere_cart') || localStorage.getItem('prabha_cart');
+    const savedWishlist = localStorage.getItem('douvere_wishlist') || localStorage.getItem('prabha_wishlist');
     if (savedCart) setCart(JSON.parse(savedCart));
     if (savedWishlist) setWishlist(JSON.parse(savedWishlist));
   }, []);
 
   // Save to local storage on change
   useEffect(() => {
-    localStorage.setItem('prabha_cart', JSON.stringify(cart));
+    localStorage.setItem('douvere_cart', JSON.stringify(cart));
   }, [cart]);
 
   useEffect(() => {
-    localStorage.setItem('prabha_wishlist', JSON.stringify(wishlist));
+    localStorage.setItem('douvere_wishlist', JSON.stringify(wishlist));
   }, [wishlist]);
 
   useEffect(() => {
-    localStorage.setItem('prabha_orders', JSON.stringify(orders));
+    localStorage.setItem('douvere_orders', JSON.stringify(orders));
   }, [orders]);
 
   useEffect(() => {
-    localStorage.setItem('prabha_discounts', JSON.stringify(discounts));
+    localStorage.setItem('douvere_discounts', JSON.stringify(discounts));
   }, [discounts]);
 
   useEffect(() => {
-    localStorage.setItem('prabha_admin_products', JSON.stringify(adminProducts));
+    localStorage.setItem('douvere_admin_products', JSON.stringify(adminProducts));
   }, [adminProducts]);
 
   const addToCart = (product: Product, quantity = 1, variant?: ProductVariant) => {
@@ -159,7 +159,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const adminLogin = (email: string, password: string): boolean => {
     if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
       setIsAdmin(true);
-      localStorage.setItem('prabha_admin', 'true');
+      localStorage.setItem('douvere_admin', 'true');
       return true;
     }
     return false;
@@ -167,6 +167,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const adminLogout = () => {
     setIsAdmin(false);
+    localStorage.removeItem('douvere_admin');
     localStorage.removeItem('prabha_admin');
   };
 

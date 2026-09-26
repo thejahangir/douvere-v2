@@ -54,7 +54,7 @@ export const Contact = () => {
                 <div>
                   <h3 className="text-lg font-medium text-stone-900 mb-1">Email Us</h3>
                   <p className="text-stone-500 mb-2">Our team usually responds within 24 hours.</p>
-                  <a href="mailto:hello@prabhapure.com" className="text-stone-900 font-medium hover:underline underline-offset-4">hello@prabhapure.com</a>
+                  <a href="mailto:hello@douvere.com" className="text-stone-900 font-medium hover:underline underline-offset-4">hello@douvere.com</a>
                 </div>
               </div>
 

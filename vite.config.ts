@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
 
   return {
-    base: '/prabha/',
+    base: '/douvere-v2/',
 
     plugins: [react(), tailwindcss()],
 

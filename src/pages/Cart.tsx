@@ -77,7 +77,7 @@ export const Cart = () => {
                         {item.selectedVariant && (
                           <p className="text-sm text-stone-500 mb-2">Variant: {item.selectedVariant.name}</p>
                         )}
-                        <p className="text-base font-medium text-stone-900">${item.price}</p>
+                        <p className="text-base font-medium text-stone-900">₹{item.price.toLocaleString('en-IN')}</p>
                       </div>
                     </div>
 
@@ -103,7 +103,7 @@ export const Cart = () => {
                     <div className="col-span-12 sm:col-span-3 flex justify-between sm:justify-end items-center w-full">
                       <span className="sm:hidden text-sm font-medium text-stone-500">Total:</span>
                       <div className="flex items-center space-x-4">
-                        <p className="text-lg font-medium text-stone-900">${(item.price * item.quantity).toFixed(2)}</p>
+                        <p className="text-lg font-medium text-stone-900">₹{(item.price * item.quantity).toLocaleString('en-IN')}</p>
                         <button 
                           onClick={() => removeFromCart(item.cartItemId)}
                           className="hidden sm:block text-stone-400 hover:text-red-500 transition-colors p-2 -mr-2 rounded-full hover:bg-red-50"
@@ -127,20 +127,20 @@ export const Cart = () => {
               <div className="space-y-4 mb-8">
                 <div className="flex justify-between text-base text-stone-600">
                   <p>Subtotal</p>
-                  <p className="font-medium text-stone-900">${cartTotal.toFixed(2)}</p>
+                  <p className="font-medium text-stone-900">₹{cartTotal.toLocaleString('en-IN')}</p>
                 </div>
                 <div className="flex justify-between text-base text-stone-600">
                   <p>Shipping</p>
-                  <p className="font-medium text-stone-900">{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</p>
+                  <p className="font-medium text-stone-900">{shipping === 0 ? 'Free' : `₹${shipping.toLocaleString('en-IN')}`}</p>
                 </div>
                 {shipping > 0 && (
                   <p className="text-xs text-stone-500 text-right -mt-2">
-                    Add ${(50 - cartTotal).toFixed(2)} more for free shipping
+                    Add ₹{(2999 - cartTotal).toLocaleString('en-IN')} more for free shipping
                   </p>
                 )}
                 <div className="flex justify-between text-base text-stone-600">
                   <p>Estimated taxes</p>
-                  <p className="font-medium text-stone-900">${tax.toFixed(2)}</p>
+                  <p className="font-medium text-stone-900">₹{tax.toLocaleString('en-IN')}</p>
                 </div>
               </div>
 
@@ -148,8 +148,8 @@ export const Cart = () => {
                 <div className="flex justify-between items-center">
                   <p className="text-xl font-bold text-stone-900">Total</p>
                   <div className="flex items-end space-x-2">
-                    <span className="text-sm text-stone-500 mb-1">USD</span>
-                    <p className="text-3xl font-bold text-stone-900">${total.toFixed(2)}</p>
+                    <span className="text-sm text-stone-500 mb-1">INR</span>
+                    <p className="text-3xl font-bold text-stone-900">₹{total.toLocaleString('en-IN')}</p>
                   </div>
                 </div>
               </div>

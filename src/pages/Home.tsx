@@ -33,7 +33,7 @@ const heroSlides = [
 ];
 
 export const Home = () => {
-  const { addToCart, discounts } = useStore();
+  const { discounts } = useStore();
   
   // Best sellers based on isBestseller flag
   const bestsellers = products.filter(p => p.isBestseller).slice(0, 4);
@@ -281,17 +281,9 @@ export const Home = () => {
                     {product.isNew && <span className="bg-gradient-to-r from-brand-pink to-brand-purple text-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest rounded-full shadow-[0_4px_12px_rgba(255,0,110,0.4)]">New</span>}
                   </div>
                   <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
-                    <motion.button 
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        addToCart(product);
-                      }}
-                      className="w-full bg-white/90 backdrop-blur-xl text-brand-purple font-bold py-3.5 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-brand-pink hover:to-brand-purple hover:text-white transition-all duration-300"
-                    >
-                      {(() => { const disc = discounts[product.id] ?? product.discount; const p = disc ? Math.round(product.price*(1-disc/100)) : product.price; return `Quick Add - ₹${p.toLocaleString('en-IN')}`; })()}
-                    </motion.button>
+                    <div className="w-full bg-white/95 backdrop-blur-xl text-stone-900 font-bold py-3.5 rounded-full shadow-lg text-center text-xs uppercase tracking-wider group-hover:bg-gradient-to-r group-hover:from-brand-pink group-hover:to-brand-purple group-hover:text-white transition-all duration-300">
+                      View Details
+                    </div>
                   </div>
                 </Link>
                 <div className="flex flex-col flex-1 px-2">
@@ -349,17 +341,9 @@ export const Home = () => {
                     {product.isNew && <span className="bg-gradient-to-r from-brand-pink to-brand-purple text-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest rounded-full shadow-[0_4px_12px_rgba(255,0,110,0.4)]">New</span>}
                   </div>
                   <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
-                    <motion.button 
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        addToCart(product);
-                      }}
-                      className="w-full bg-white/90 backdrop-blur-xl text-brand-purple font-bold py-3.5 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-brand-pink hover:to-brand-purple hover:text-white transition-all duration-300"
-                    >
-                      {(() => { const disc = discounts[product.id] ?? product.discount; const p = disc ? Math.round(product.price*(1-disc/100)) : product.price; return `Quick Add - ₹${p.toLocaleString('en-IN')}`; })()}
-                    </motion.button>
+                    <div className="w-full bg-white/95 backdrop-blur-xl text-stone-900 font-bold py-3.5 rounded-full shadow-lg text-center text-xs uppercase tracking-wider group-hover:bg-gradient-to-r group-hover:from-brand-pink group-hover:to-brand-purple group-hover:text-white transition-all duration-300">
+                      View Details
+                    </div>
                   </div>
                 </Link>
                 <div className="flex flex-col flex-1 px-2">
@@ -417,17 +401,9 @@ export const Home = () => {
                     {product.isNew && <span className="bg-gradient-to-r from-brand-pink to-brand-purple text-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest rounded-full shadow-[0_4px_12px_rgba(255,0,110,0.4)]">New</span>}
                   </div>
                   <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
-                    <motion.button 
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        addToCart(product);
-                      }}
-                      className="w-full bg-white/90 backdrop-blur-xl text-brand-purple font-bold py-3.5 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-brand-pink hover:to-brand-purple hover:text-white transition-all duration-300"
-                    >
-                      {(() => { const disc = discounts[product.id] ?? product.discount; const p = disc ? Math.round(product.price*(1-disc/100)) : product.price; return `Quick Add - ₹${p.toLocaleString('en-IN')}`; })()}
-                    </motion.button>
+                    <div className="w-full bg-white/95 backdrop-blur-xl text-stone-900 font-bold py-3.5 rounded-full shadow-lg text-center text-xs uppercase tracking-wider group-hover:bg-gradient-to-r group-hover:from-brand-pink group-hover:to-brand-purple group-hover:text-white transition-all duration-300">
+                      View Details
+                    </div>
                   </div>
                 </Link>
                 <div className="flex flex-col flex-1 px-2">
@@ -463,7 +439,7 @@ export const Home = () => {
                 Clean ingredients, <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-pink to-brand-purple">clinically proven.</span>
               </h2>
               <p className="text-xl text-stone-600 mb-8 leading-relaxed font-medium">
-                We believe that what you put on your skin matters. That's why every Prabha Pure product is formulated with potent, plant-derived ingredients and safe synthetics that deliver visible results without compromising your skin's health.
+                We believe that what you put on your skin matters. That's why every Douvère product is formulated with potent, plant-derived ingredients and safe synthetics that deliver visible results without compromising your skin's health.
               </p>
               <ul className="space-y-4 mb-10">
                 {['Cruelty-free & Vegan', 'Dermatologist Tested', 'No Parabens or Sulfates', 'Sustainable Packaging'].map((item, i) => (

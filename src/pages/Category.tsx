@@ -7,7 +7,6 @@ import { motion } from 'motion/react';
 
 export const Category = () => {
   const { categoryName } = useParams<{ categoryName: string }>();
-  const { addToCart } = useStore();
   const [sortBy, setSortBy] = useState('featured');
 
   // Format category name from URL (e.g., 'body-care' to 'Body Care')
@@ -93,17 +92,9 @@ export const Category = () => {
                   </span>
                 )}
                 <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0">
-                  <motion.button 
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      addToCart(product);
-                    }}
-                    className="w-full bg-white/90 backdrop-blur-sm text-stone-900 font-medium py-3 rounded-full shadow-sm hover:bg-white transition-colors"
-                  >
-                    Quick Add - ${product.price}
-                  </motion.button>
+                  <div className="w-full bg-white/95 backdrop-blur-sm text-stone-900 font-bold py-3 rounded-full shadow-md text-center text-xs uppercase tracking-wider group-hover:bg-brand-purple group-hover:text-white transition-all">
+                    View Details
+                  </div>
                 </div>
               </Link>
               <div className="flex flex-col flex-1">
@@ -118,7 +109,7 @@ export const Category = () => {
                   </Link>
                 </h3>
                 <p className="text-sm text-stone-500 mb-2 line-clamp-1">{product.description}</p>
-                <p className="text-base font-medium text-stone-900 mt-auto">${product.price}</p>
+                <p className="text-base font-medium text-stone-900 mt-auto">₹{product.price.toLocaleString('en-IN')}</p>
               </div>
             </motion.div>
           ))}

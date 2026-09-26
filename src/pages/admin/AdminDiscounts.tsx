@@ -113,8 +113,8 @@ export const AdminDiscounts: React.FC = () => {
                     <div className="min-w-0">
                       <p className="text-white/90 font-semibold text-xs truncate">{product.name}</p>
                       <p className="text-xs mt-0.5">
-                        <span className="line-through text-white/30">${product.price}</span>
-                        {' '}<span className="text-green-400 font-bold">${discPrice.toFixed(2)}</span>
+                        <span className="line-through text-white/30">₹{product.price.toLocaleString('en-IN')}</span>
+                        {' '}<span className="text-green-400 font-bold">₹{discPrice.toLocaleString('en-IN')}</span>
                       </p>
                     </div>
                   </div>
@@ -190,7 +190,7 @@ export const AdminDiscounts: React.FC = () => {
                       </div>
                     </td>
                     <td className="py-3 px-4 text-white/40">{product.category}</td>
-                    <td className="py-3 px-4 font-bold text-white/80">${product.price}</td>
+                    <td className="py-3 px-4 font-bold text-white/80">₹{product.price.toLocaleString('en-IN')}</td>
                     <td className="py-3 px-4">
                       {editingId === product.id ? (
                         <div className="flex gap-2 items-center">

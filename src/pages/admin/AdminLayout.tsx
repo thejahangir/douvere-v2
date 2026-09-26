@@ -5,6 +5,7 @@ import {
   LayoutDashboard, Package, ShoppingCart, CreditCard, Tag,
   LogOut, Menu, X, ChevronRight, ExternalLink
 } from 'lucide-react';
+import logoImg from '../../assets/img/logo-douvere.png';
 
 const navItems = [
   { path: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -40,10 +41,8 @@ export const AdminLayout: React.FC = () => {
     <div className="flex flex-col h-full">
       {/* Logo */}
       <div className="px-6 py-5 border-b border-white/5">
-        <Link to="/" className="flex items-center gap-2 group" onClick={() => setSidebarOpen(false)}>
-          <span className="text-xl font-serif font-black tracking-tighter text-white">
-            PRABHA<span className="text-yellow-400">.</span>
-          </span>
+        <Link to="/" className="flex items-center gap-3 group" onClick={() => setSidebarOpen(false)}>
+          <img src={logoImg} alt="Douvere" className="h-6 w-auto object-contain brightness-0 invert" />
           <span className="text-[10px] font-bold uppercase tracking-widest text-white/30 bg-white/5 px-2 py-0.5 rounded-full">
             Admin
           </span>

@@ -288,7 +288,7 @@ export const Account = () => {
                           </div>
                           <div className="flex flex-col justify-center flex-1">
                             <h3 className="font-bold text-stone-900">{item.name}</h3>
-                            <p className="text-stone-500">${item.price}</p>
+                            <p className="text-stone-500">₹{item.price.toLocaleString('en-IN')}</p>
                             <div className="flex items-center gap-4 mt-2">
                               <button 
                                 onClick={() => addToCart(item)}

@@ -22,7 +22,7 @@ export const About = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-stone-600 leading-relaxed"
             >
-              Prabha Pure was born from a simple belief: skincare should be effective, clean, and a joy to use. We create high-performance essentials that celebrate your skin, not hide it.
+              Douvère was born from a simple belief: skincare should be effective, clean, and a joy to use. We create high-performance essentials that celebrate your skin, not hide it.
             </motion.p>
           </div>
         </div>
@@ -58,10 +58,10 @@ export const About = () => {
               <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-6">Our Story</h2>
               <div className="space-y-6 text-stone-600 text-lg leading-relaxed">
                 <p>
-                  Founded in 2024, Prabha Pure started with a frustration over the beauty industry's impossible standards and complicated routines. Our founder, Maya, wanted products that felt like a breath of fresh air—simple, effective, and transparent.
+                  Founded in 2024, Douvère started with a frustration over the beauty industry's impossible standards and complicated routines. Our founder, Maya, wanted products that felt like a breath of fresh air—simple, effective, and transparent.
                 </p>
                 <p>
-                  "Prabha" means radiance or glow in Sanskrit. It's a reflection of our core philosophy: true beauty comes from within, and our products are simply tools to help your natural light shine through.
+                  "Douvère" represents pure elegance and natural radiance. It's a reflection of our core philosophy: true beauty comes from within, and our products are simply tools to help your natural light shine through.
                 </p>
                 <p>
                   We spent two years working with top chemists to develop formulas that combine the best of nature with safe, clinically-proven synthetics. The result is a curated line of essentials that you'll reach for every single day.

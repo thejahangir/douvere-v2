@@ -138,9 +138,9 @@ export const AdminProducts: React.FC = () => {
                 </div>
                 {/* Price */}
                 <div>
-                  <label className="field-label">Price ($) *</label>
-                  <input required type="number" min="0" step="0.01" value={form.price} onChange={e => setForm(f => ({ ...f, price: parseFloat(e.target.value) }))}
-                    className="admin-input" placeholder="0.00" />
+                  <label className="field-label">Price (₹) *</label>
+                  <input required type="number" min="0" step="1" value={form.price} onChange={e => setForm(f => ({ ...f, price: parseFloat(e.target.value) }))}
+                    className="admin-input" placeholder="0" />
                 </div>
                 {/* Category */}
                 <div>
@@ -304,7 +304,7 @@ export const AdminProducts: React.FC = () => {
                       </div>
                     </td>
                     <td className="py-3 px-4 text-white/50 text-xs">{product.category}</td>
-                    <td className="py-3 px-4 font-bold text-white/90 text-xs">${product.price}</td>
+                    <td className="py-3 px-4 font-bold text-white/90 text-xs">₹{product.price.toLocaleString('en-IN')}</td>
                     <td className="py-3 px-4">
                       {discount ? (
                         <span className="text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full font-bold">{discount}% OFF</span>

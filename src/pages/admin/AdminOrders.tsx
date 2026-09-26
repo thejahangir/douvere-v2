@@ -72,7 +72,7 @@ export const AdminOrders: React.FC = () => {
                   <p className="text-white/30 text-xs">{order.email}</p>
                 </div>
                 <div className="text-right">
-                  <p className="font-bold text-white text-sm">${order.total.toFixed(2)}</p>
+                  <p className="font-bold text-white text-sm">₹{order.total.toLocaleString('en-IN')}</p>
                   <p className="text-white/30 text-xs">{new Date(order.createdAt).toLocaleDateString()}</p>
                 </div>
                 <span className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-bold border capitalize ${meta.color}`}>
@@ -117,7 +117,7 @@ export const AdminOrders: React.FC = () => {
                             {item.variant && <p className="text-white/30 text-[10px]">{item.variant}</p>}
                           </div>
                           <span className="text-white/40 text-xs">x{item.quantity}</span>
-                          <span className="text-white font-bold text-xs">${(item.price * item.quantity).toFixed(2)}</span>
+                          <span className="text-white font-bold text-xs">₹{(item.price * item.quantity).toLocaleString('en-IN')}</span>
                         </div>
                       ))}
                     </div>
@@ -125,10 +125,10 @@ export const AdminOrders: React.FC = () => {
 
                   {/* Summary */}
                   <div className="bg-white/3 rounded-xl px-4 py-3 text-xs space-y-1">
-                    <div className="flex justify-between text-white/40"><span>Subtotal</span><span>${order.subtotal.toFixed(2)}</span></div>
-                    <div className="flex justify-between text-white/40"><span>Shipping</span><span>{order.shipping === 0 ? 'Free' : `$${order.shipping.toFixed(2)}`}</span></div>
-                    <div className="flex justify-between text-white/40"><span>Tax</span><span>${order.tax.toFixed(2)}</span></div>
-                    <div className="flex justify-between text-white font-bold border-t border-white/5 pt-1 mt-1"><span>Total</span><span>${order.total.toFixed(2)}</span></div>
+                    <div className="flex justify-between text-white/40"><span>Subtotal</span><span>₹{order.subtotal.toLocaleString('en-IN')}</span></div>
+                    <div className="flex justify-between text-white/40"><span>Shipping</span><span>{order.shipping === 0 ? 'Free' : `₹${order.shipping.toLocaleString('en-IN')}`}</span></div>
+                    <div className="flex justify-between text-white/40"><span>Tax</span><span>₹{order.tax.toLocaleString('en-IN')}</span></div>
+                    <div className="flex justify-between text-white font-bold border-t border-white/5 pt-1 mt-1"><span>Total</span><span>₹{order.total.toLocaleString('en-IN')}</span></div>
                   </div>
 
                   {/* Actions */}

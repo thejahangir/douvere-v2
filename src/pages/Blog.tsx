@@ -50,7 +50,7 @@ export const Blog = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-stone-900 mb-4 tracking-tight">The Glow Down</h1>
           <p className="text-stone-500 max-w-2xl mx-auto text-lg">
-            Expert advice, skincare routines, and beauty tips from the Prabha Pure team.
+            Expert advice, skincare routines, and beauty tips from the Douvère team.
           </p>
         </div>
       </div>

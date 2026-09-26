@@ -7,12 +7,10 @@ import { motion, AnimatePresence } from 'motion/react';
 
 export const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const { addToCart, addToWishlist, removeFromWishlist, isInWishlist, discounts } = useStore();
-  const [quantity, setQuantity] = useState(1);
+  const { addToWishlist, removeFromWishlist, isInWishlist, discounts } = useStore();
   const [activeImage, setActiveImage] = useState(0);
   const [direction, setDirection] = useState(0);
   const [activeTab, setActiveTab] = useState<'details' | 'ingredients' | 'how-to'>('details');
-  const [isAdded, setIsAdded] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -106,11 +104,7 @@ export const ProductDetail = () => {
     }
   };
 
-  const handleAddToCart = () => {
-    addToCart(product, quantity, selectedVariant || undefined);
-    setIsAdded(true);
-    setTimeout(() => setIsAdded(false), 2000);
-  };
+
 
   const toggleWishlist = () => {
     if (isInWishlist(product.id)) {
@@ -342,46 +336,13 @@ export const ProductDetail = () => {
               )}
             </div>
 
-            {/* Actions */}
-            <div className="mb-12 space-y-6">
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center border border-stone-200 rounded-full h-14 w-32">
-                  <button 
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="flex-1 flex justify-center items-center text-stone-500 hover:text-stone-900 transition-colors"
-                  >
-                    <Minus size={18} />
-                  </button>
-                  <span className="text-base font-medium w-10 text-center">{quantity}</span>
-                  <button 
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="flex-1 flex justify-center items-center text-stone-500 hover:text-stone-900 transition-colors"
-                  >
-                    <Plus size={18} />
-                  </button>
-                </div>
-                <button 
-                  onClick={handleAddToCart}
-                  className={`flex-1 h-14 rounded-full text-sm tracking-widest uppercase font-bold transition-all duration-300 flex items-center justify-center shadow-xl ${
-                    isAdded 
-                      ? 'bg-emerald-500 text-white shadow-emerald-500/30' 
-                      : 'bg-gradient-to-r from-brand-pink to-brand-purple text-white hover:from-brand-purple hover:to-brand-blue hover:shadow-brand-purple/40 transform hover:-translate-y-1'
-                  }`}
-                >
-                  {isAdded ? (
-                    <span className="flex items-center"><Check size={20} className="mr-2" /> Added to Cart</span>
-                  ) : (
-                    (() => {
-                      const disc = discounts[product.id] ?? product.discount;
-                      const unitPrice = disc ? Math.round(product.price * (1 - disc / 100)) : product.price;
-                      return `Add to Cart - ₹${(unitPrice * quantity).toLocaleString('en-IN')}`;
-                    })()
-                  )}
-                </button>
-              </div>
-              <div className="flex items-center justify-center space-x-6 text-xs font-medium text-stone-500 uppercase tracking-wider">
-                <span className="flex items-center"><Check size={14} className="mr-1.5 text-emerald-500" /> In Stock</span>
-                <span className="flex items-center"><Check size={14} className="mr-1.5 text-emerald-500" /> Free Shipping over ₹2,999</span>
+            {/* Product Highlights & Guarantees */}
+            <div className="mb-10 space-y-4">
+              <div className="p-4 rounded-2xl bg-stone-50 border border-stone-100 flex flex-wrap gap-4 items-center justify-between text-xs font-semibold text-stone-700">
+                <span className="flex items-center text-emerald-600 font-bold"><Check size={16} className="mr-1.5" /> In Stock</span>
+                <span className="flex items-center"><Check size={16} className="mr-1.5 text-brand-purple" /> 100% Vegan & Cruelty-Free</span>
+                <span className="flex items-center"><Check size={16} className="mr-1.5 text-brand-purple" /> Dermatologist Tested</span>
+                <span className="flex items-center"><Check size={16} className="mr-1.5 text-brand-purple" /> Clean Ingredients</span>
               </div>
             </div>
 
@@ -584,17 +545,9 @@ export const ProductDetail = () => {
                       </div>
                     )}
                     <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0">
-                      <motion.button 
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          addToCart(recommendedProduct);
-                        }}
-                        className="w-full bg-white/90 backdrop-blur-sm text-stone-900 font-medium py-3 rounded-full shadow-sm hover:bg-white transition-colors"
-                      >
-                        Quick Add - ₹{recommendedProduct.price.toLocaleString('en-IN')}
-                      </motion.button>
+                      <div className="w-full bg-white/95 backdrop-blur-sm text-stone-900 font-bold py-3 rounded-full shadow-md text-center text-xs uppercase tracking-wider group-hover:bg-brand-purple group-hover:text-white transition-all">
+                        View Details
+                      </div>
                     </div>
                   </Link>
                   <div className="flex flex-col flex-1">

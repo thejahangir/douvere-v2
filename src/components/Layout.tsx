@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { ShoppingBag, Heart, User, Search, Menu, X, ArrowRight, ArrowUp } from 'lucide-react';
-import { useStore } from '../context/StoreContext';
+import { Search, Menu, X, ArrowRight, ArrowUp } from 'lucide-react';
 import { products } from '../data/products';
 import { motion, AnimatePresence } from 'motion/react';
+import logoImg from '../assets/img/logo-douvere.png';
 
 export const Layout = () => {
-  const { cartCount, isCartOpen, setIsCartOpen, cart, removeFromCart, updateQuantity, cartTotal } = useStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [isAnnouncementVisible, setIsAnnouncementVisible] = React.useState(true);
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
@@ -32,15 +31,15 @@ export const Layout = () => {
     ).slice(0, 5); // Limit to top 5 results
   }, [searchQuery]);
 
-  // Stop body scroll when search or cart is open
+  // Stop body scroll when search is open
   React.useEffect(() => {
-    if (isSearchOpen || isCartOpen) {
+    if (isSearchOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
     return () => { document.body.style.overflow = 'unset'; };
-  }, [isSearchOpen, isCartOpen]);
+  }, [isSearchOpen]);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -64,7 +63,7 @@ export const Layout = () => {
             exit={{ height: 0, opacity: 0 }}
             className="bg-gradient-to-r from-brand-orange via-brand-pink to-brand-purple text-white text-xs font-bold py-2.5 text-center tracking-widest uppercase shadow-sm relative overflow-hidden"
           >
-            FREE SHIPPING ON ALL ORDERS OVER $50
+            FREE SHIPPING ON ALL ORDERS OVER ₹2,999
             <button 
               onClick={() => setIsAnnouncementVisible(false)}
               className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors"
@@ -93,44 +92,27 @@ export const Layout = () => {
 
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center justify-center lg:justify-start flex-1 lg:flex-none">
-              <Link to="/" className="text-2xl font-serif font-black tracking-tighter text-stone-900">
-                PRABHA<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-brand-pink">.</span>
+              <Link to="/" className="flex items-center">
+                <img src={logoImg} alt="Douvere" className="h-8 sm:h-9 w-auto object-contain logo-deuvere" />
               </Link>
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex space-x-8 items-center">
-              <Link to="/shop" className="text-sm font-bold text-stone-600 hover:text-brand-pink transition-colors">Shop All</Link>
-              <Link to="/category/skincare" className="text-sm font-bold text-stone-600 hover:text-brand-pink transition-colors">Skincare</Link>
-              <Link to="/category/makeup" className="text-sm font-bold text-stone-600 hover:text-brand-pink transition-colors">Makeup</Link>
-              <Link to="/about" className="text-sm font-bold text-stone-600 hover:text-brand-pink transition-colors">About</Link>
+            <nav className="hidden lg:flex space-x-11 items-center">
+              <Link to="/shop" className="text-lg font-extrabold text-stone-800 hover:text-brand-pink transition-colors">Shop All</Link>
+              <Link to="/category/skincare" className="text-lg font-extrabold text-stone-800 hover:text-brand-pink transition-colors">Skincare</Link>
+              <Link to="/category/makeup" className="text-lg font-extrabold text-stone-800 hover:text-brand-pink transition-colors">Makeup</Link>
+              <Link to="/about" className="text-lg font-extrabold text-stone-800 hover:text-brand-pink transition-colors">About</Link>
             </nav>
 
-            {/* Icons */}
-            <div className="flex items-center space-x-4 lg:space-x-6">
+            {/* Icons / Actions - Right side: Search Only */}
+            <div className="flex items-center">
               <button 
-                className="text-stone-600 hover:text-brand-pink hidden sm:block transition-colors focus:outline-none"
+                className="text-stone-600 hover:text-brand-pink transition-colors focus:outline-none p-1.5 hover:bg-stone-100/60 rounded-full"
                 onClick={() => setIsSearchOpen(true)}
                 aria-label="Open search"
               >
                 <Search size={20} />
-              </button>
-              <Link to="/login" className="text-stone-600 hover:text-brand-pink hidden sm:block transition-colors">
-                <User size={20} />
-              </Link>
-              <Link to="/wishlist" className="text-stone-600 hover:text-brand-pink hidden sm:block transition-colors">
-                <Heart size={20} />
-              </Link>
-              <button 
-                className="text-stone-600 hover:text-brand-pink relative transition-colors"
-                onClick={() => setIsCartOpen(true)}
-              >
-                <ShoppingBag size={20} />
-                {cartCount > 0 && (
-                  <span className="absolute -top-1.5 -right-1.5 bg-brand-pink text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center shadow-sm">
-                    {cartCount}
-                  </span>
-                )}
               </button>
             </div>
           </div>
@@ -149,24 +131,16 @@ export const Layout = () => {
                 <Link to="/category/skincare" className="block px-4 py-3 text-base font-bold text-stone-900 hover:text-brand-pink hover:bg-stone-50 rounded-xl transition-colors">Skincare</Link>
                 <Link to="/category/makeup" className="block px-4 py-3 text-base font-bold text-stone-900 hover:text-brand-pink hover:bg-stone-50 rounded-xl transition-colors">Makeup</Link>
                 <Link to="/about" className="block px-4 py-3 text-base font-bold text-stone-900 hover:text-brand-pink hover:bg-stone-50 rounded-xl transition-colors">About</Link>
-                <div className="flex space-x-8 px-4 py-6 mt-4 border-t border-stone-100 justify-center">
-                  <Link to="/login" className="flex flex-col items-center text-stone-500 hover:text-brand-pink transition-colors">
-                    <User size={24} />
-                    <span className="text-xs mt-2 font-bold">Account</span>
-                  </Link>
-                  <Link to="/wishlist" className="flex flex-col items-center text-stone-500 hover:text-brand-pink transition-colors">
-                    <Heart size={24} />
-                    <span className="text-xs mt-2 font-bold">Wishlist</span>
-                  </Link>
+                <div className="px-4 pt-4 mt-2 border-t border-stone-100">
                   <button 
                     onClick={() => {
                         setIsMobileMenuOpen(false);
                         setIsSearchOpen(true);
                     }}
-                    className="flex flex-col items-center text-stone-500 hover:text-brand-pink transition-colors focus:outline-none"
+                    className="flex items-center space-x-3 w-full px-4 py-3 text-stone-600 hover:text-brand-pink hover:bg-stone-50 rounded-xl transition-colors text-sm font-bold"
                   >
-                    <Search size={24} />
-                    <span className="text-xs mt-2 font-bold">Search</span>
+                    <Search size={18} />
+                    <span>Search Products</span>
                   </button>
                 </div>
               </div>
@@ -257,7 +231,7 @@ export const Layout = () => {
                            <p className="text-[10px] font-bold uppercase tracking-widest text-brand-pink mb-0.5">{product.category}</p>
                            <h4 className="text-sm font-bold text-stone-900 group-hover:text-brand-purple transition-colors">{product.name}</h4>
                         </div>
-                        <div className="text-sm font-bold text-stone-500 mr-4 tabular-nums">${product.price}</div>
+                        <div className="text-sm font-bold text-stone-700 mr-4 tabular-nums">₹{product.price.toLocaleString('en-IN')}</div>
                         <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center border border-stone-100 group-hover:bg-brand-pink/10 group-hover:border-brand-pink/20 transition-colors">
                           <ArrowRight size={14} className="text-stone-300 group-hover:text-brand-pink group-hover:translate-x-0.5 transition-all" />
                         </div>
@@ -292,8 +266,8 @@ export const Layout = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12">
             <div className="col-span-1 md:col-span-1">
-              <Link to="/" className="text-2xl font-serif font-bold tracking-tighter text-white mb-4 block">
-                PRABHA<span className="text-brand-yellow">.</span>
+              <Link to="/" className="inline-block mb-4">
+                <img src={logoImg} alt="Douvere" className="h-8 sm:h-9 w-auto object-contain brightness-0 invert" />
               </Link>
               <p className="text-sm text-stone-400 mb-6">
                 Clean, modern beauty essentials designed to enhance your natural radiance.
@@ -336,7 +310,7 @@ export const Layout = () => {
             </div>
           </div>
           <div className="border-t border-stone-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-xs text-stone-500">© 2026 Prabha Pure. All rights reserved.</p>
+            <p className="text-xs text-stone-500">© 2026 Douvère. All rights reserved.</p>
             <div className="flex space-x-4 mt-4 md:mt-0 items-center">
               <a href="#" className="text-stone-500 hover:text-white transition-colors text-xs">Privacy Policy</a>
               <a href="#" className="text-stone-500 hover:text-white transition-colors text-xs">Terms of Service</a>
@@ -346,118 +320,7 @@ export const Layout = () => {
         </div>
       </footer>
 
-      {/* Cart Sidebar */}
-      <AnimatePresence>
-        {isCartOpen && (
-          <>
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsCartOpen(false)}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50"
-            />
-            <motion.div 
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl z-50 flex flex-col"
-            >
-              <div className="flex items-center justify-between p-4 border-b border-stone-100">
-                <h2 className="text-lg font-medium">Your Cart ({cartCount})</h2>
-                <button 
-                  onClick={() => setIsCartOpen(false)}
-                  className="p-2 text-stone-400 hover:text-stone-600 rounded-full hover:bg-stone-100 transition-colors"
-                >
-                  <X size={20} />
-                </button>
-              </div>
 
-              <div className="flex-1 overflow-y-auto p-4">
-                {cart.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center h-full text-stone-500 space-y-4">
-                    <ShoppingBag size={48} className="text-stone-300" />
-                    <p>Your cart is empty.</p>
-                    <button 
-                      onClick={() => setIsCartOpen(false)}
-                      className="px-6 py-2 bg-stone-900 text-white text-sm font-medium rounded-full hover:bg-stone-800 transition-colors"
-                    >
-                      Continue Shopping
-                    </button>
-                  </div>
-                ) : (
-                  <div className="space-y-6">
-                    {cart.map((item) => (
-                      <div key={item.cartItemId} className="flex space-x-4">
-                        <div className="w-20 h-24 bg-stone-100 rounded-md overflow-hidden flex-shrink-0">
-                          {item.image ? (
-                            <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center bg-stone-200 text-stone-400 font-serif text-3xl">
-                              {item.name.charAt(0)}
-                            </div>
-                          )}
-                        </div>
-                        <div className="flex-1 flex flex-col">
-                          <div className="flex justify-between">
-                            <div>
-                              <h3 className="text-sm font-medium text-stone-900">{item.name}</h3>
-                              {item.selectedVariant && (
-                                <p className="text-xs text-stone-500 mt-1">Variant: {item.selectedVariant.name}</p>
-                              )}
-                            </div>
-                            <button 
-                              onClick={() => removeFromCart(item.cartItemId)}
-                              className="text-stone-400 hover:text-stone-600"
-                            >
-                              <X size={16} />
-                            </button>
-                          </div>
-                          <p className="text-sm text-stone-500 mt-1">₹{item.price.toLocaleString('en-IN')}</p>
-                          
-                          <div className="mt-auto flex items-center border border-stone-200 rounded-full w-24 h-8">
-                            <button 
-                              onClick={() => updateQuantity(item.cartItemId, item.quantity - 1)}
-                              className="flex-1 flex justify-center items-center text-stone-500 hover:text-stone-900"
-                            >
-                              -
-                            </button>
-                            <span className="text-sm font-medium w-8 text-center">{item.quantity}</span>
-                            <button 
-                              onClick={() => updateQuantity(item.cartItemId, item.quantity + 1)}
-                              className="flex-1 flex justify-center items-center text-stone-500 hover:text-stone-900"
-                            >
-                              +
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {cart.length > 0 && (
-                <div className="p-4 border-t border-stone-100 bg-stone-50">
-                  <div className="flex justify-between text-base font-medium text-stone-900 mb-4">
-                    <p>Subtotal</p>
-                    <p>${cartTotal.toFixed(2)}</p>
-                  </div>
-                  <p className="text-xs text-stone-500 mb-4">Shipping and taxes calculated at checkout.</p>
-                  <Link 
-                    to="/checkout"
-                    onClick={() => setIsCartOpen(false)}
-                    className="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-full shadow-md text-base font-bold text-white bg-gradient-to-r from-brand-pink to-brand-purple hover:from-brand-purple hover:to-brand-blue transition-all duration-300 transform hover:-translate-y-0.5"
-                  >
-                    Checkout
-                  </Link>
-                </div>
-              )}
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
 
       {/* Go Top Button */}
       <AnimatePresence>

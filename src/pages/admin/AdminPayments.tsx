@@ -47,7 +47,7 @@ export const AdminPayments: React.FC = () => {
         ].map(card => (
           <div key={card.label} className={`bg-gradient-to-br ${card.color} border rounded-2xl p-5`}>
             <div className={`${card.text} mb-3`}>{card.icon}</div>
-            <p className="text-xl font-bold text-white">${card.value.toFixed(2)}</p>
+            <p className="text-xl font-bold text-white">₹{card.value.toLocaleString('en-IN')}</p>
             <p className="text-xs text-white/40 mt-1 font-medium">{card.label}</p>
           </div>
         ))}
@@ -107,7 +107,7 @@ export const AdminPayments: React.FC = () => {
                         {payment.method}
                       </span>
                     </td>
-                    <td className="py-3 px-4 font-bold text-white">${payment.amount.toFixed(2)}</td>
+                    <td className="py-3 px-4 font-bold text-white">₹{payment.amount.toLocaleString('en-IN')}</td>
                     <td className="py-3 px-4 text-white/40">{new Date(payment.date).toLocaleDateString()}</td>
                     <td className="py-3 px-4">
                       <span className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold border capitalize w-fit ${cfg.color}`}>

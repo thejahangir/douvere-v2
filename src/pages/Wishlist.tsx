@@ -75,7 +75,7 @@ export const Wishlist = () => {
                   <p className="text-sm text-stone-500 mb-4">{product.category}</p>
                   
                   <div className="mt-auto flex items-center justify-between">
-                    <p className="text-lg font-medium text-stone-900">${product.price}</p>
+                    <p className="text-lg font-medium text-stone-900">₹{product.price.toLocaleString('en-IN')}</p>
                     <button 
                       onClick={() => addToCart(product)}
                       className="flex items-center justify-center p-3 bg-stone-900 text-white rounded-full hover:bg-stone-800 transition-colors"
